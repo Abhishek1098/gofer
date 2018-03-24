@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         textViewTitle = findViewById(R.id.id_main_TextView_title);
         listViewMain = findViewById(R.id.id_main_ListView);
-        floatingActionButton = findViewById(R.id.id_main_FloatingActionButton);
 
         typeface_brainfish = Typeface.createFromAsset(getAssets(), "verdana.ttf");
         textViewTitle.setTypeface(typeface_brainfish);
@@ -88,11 +87,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
     }
     public void setViewTask(){
         textViewTitle.setText(R.string.title_task);
@@ -111,12 +105,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
 }
