@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Gofer</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_task">Task</string>
+    <string name="title_offer">Offer</string>
+    <string name="title_title">Title</string>
+    <string name="string_cost">Cost</string>
+    <string name="string_time">Time</string>
 </resources>
