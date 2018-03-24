@@ -11,11 +11,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView listViewMain;
     private TextView textViewTitle;
     private FloatingActionButton floatingActionButton;
-    private Typeface typeface_brainfish;
+    private Typeface typeface_verdana;
+    private ImageButton imageButtonSubmit;
+    static final String SUBMIT_TYPE="submit type";
+    static final int POST_KEY_CODE = 000001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         textViewTitle = findViewById(R.id.id_main_TextView_title);
         listViewMain = findViewById(R.id.id_main_ListView);
-        floatingActionButton = findViewById(R.id.id_main_FloatingActionButton);
+        imageButtonSubmit = findViewById(R.id.id_main_ImageButton_submit);
 
-        typeface_brainfish = Typeface.createFromAsset(getAssets(), "verdana.ttf");
-        textViewTitle.setTypeface(typeface_brainfish);
+        typeface_verdana = Typeface.createFromAsset(getAssets(), "verdana.ttf");
+        textViewTitle.setTypeface(typeface_verdana);
         textViewTitle.setTextSize(80);
         textViewTitle.setTextColor(getResources().getColor(R.color.silver, null)); //light blue
 
@@ -88,12 +93,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        imageButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                intent.putExtra(SUBMIT_TYPE, "offer");
+                startActivityForResult(intent, POST_KEY_CODE);
             }
         });
     }
+
     public void setViewTask(){
         textViewTitle.setText(R.string.title_task);
 
@@ -111,12 +120,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        imageButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                intent.putExtra(SUBMIT_TYPE, "task");
+                startActivityForResult(intent, POST_KEY_CODE);
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == POST_KEY_CODE){
+                String [] objArray = data.getStringArrayExtra(PostActivity.SERVICE_OBJ_KEY);
+                switch (objArray[0]){
+                    case "offer":
+                        Offer offer = new Offer(objArray[1], objArray[2], objArray[3],objArray[4]);
+                        //Add this to the database
+                        break;
+
+                    case "task":
+                        Task task = new Task(objArray[1], objArray[2], objArray[3],objArray[4]);
+                        //Add this to the database
+                        break;
+                }
+            }
+        }
+    }
+
 
 }

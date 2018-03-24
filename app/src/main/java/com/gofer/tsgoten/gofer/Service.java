@@ -1,6 +1,8 @@
 package com.gofer.tsgoten.gofer;
 
-public class Service {
+import android.os.Parcelable;
+
+public class Service{
     private String title, description, cost, time;
     public Service(String title, String description, String cost, String time){
         this.title=title;

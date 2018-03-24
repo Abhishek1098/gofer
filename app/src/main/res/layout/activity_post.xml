@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gofer.tsgoten.gofer.PostActivity">
+
+    <EditText
+        android:id="@+id/id_post_EditText_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/id_post_EditText_cost"
+        app:layout_constraintStart_toStartOf="@+id/id_post_EditText_cost"
+        app:layout_constraintTop_toBottomOf="@+id/id_post_EditText_cost" />
+
+    <EditText
+        android:id="@+id/id_post_EditText_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/id_post_EditText_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/id_post_TextView_static_cost"
+        app:layout_constraintEnd_toEndOf="@+id/id_post_EditText_cost"
+        app:layout_constraintStart_toStartOf="@+id/id_post_EditText_cost"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_post_TextView_static_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/title_title"
+        app:layout_constraintBottom_toTopOf="@+id/id_post_EditText_title"
+        app:layout_constraintEnd_toEndOf="@+id/id_post_EditText_title"
+        app:layout_constraintStart_toStartOf="@+id/id_post_EditText_title" />
+
+    <TextView
+        android:id="@+id/id_post_TextView_static_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/string_cost"
+        app:layout_constraintBottom_toTopOf="@+id/id_post_EditText_cost"
+        app:layout_constraintEnd_toEndOf="@+id/id_post_EditText_cost"
+        app:layout_constraintStart_toStartOf="@+id/id_post_EditText_cost" />
+
+    <TextView
+        android:id="@+id/id_post_TextView_static_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/string_description"
+        app:layout_constraintBottom_toTopOf="@+id/id_post_EditText_description"
+        app:layout_constraintEnd_toEndOf="@+id/id_post_EditText_description"
+        app:layout_constraintStart_toStartOf="@+id/id_post_EditText_description" />
+
+    <Button
+        android:id="@+id/id_post_Button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/string_submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_post_EditText_description" />
+</android.support.constraint.ConstraintLayout>

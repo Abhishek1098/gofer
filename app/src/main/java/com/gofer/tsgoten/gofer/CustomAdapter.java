@@ -16,7 +16,7 @@ public class CustomAdapter extends ArrayAdapter{
 
     private Context context;
     private ArrayList<Service> services;
-    private Typeface typeface_brainfish;
+    private Typeface typeface_verdana;
 
     public CustomAdapter(@NonNull Context context, int resource, ArrayList<Service> services) {
         super(context, resource, services);
@@ -30,24 +30,24 @@ public class CustomAdapter extends ArrayAdapter{
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(MainActivity.LAYOUT_INFLATER_SERVICE);
         View adapterView = layoutInflater.inflate(R.layout.adapter_custom, null);
 
-        typeface_brainfish = Typeface.createFromAsset(context.getAssets(), "verdana.ttf");
+        typeface_verdana = Typeface.createFromAsset(context.getAssets(), "verdana.ttf");
 
         TextView textViewTitle = adapterView.findViewById(R.id.id_customAdapter_TextView_title);
         textViewTitle.setText(services.get(position).getTitle());
         textViewTitle.setTextSize(35);
-        textViewTitle.setTypeface(typeface_brainfish);
+        textViewTitle.setTypeface(typeface_verdana);
         //textViewTitle.setTextColor();
 
         TextView textViewCost = adapterView.findViewById(R.id.id_customAdapter_TextView_cost);
         textViewCost.setText(services.get(position).getCost());
         textViewCost.setTextSize(25);
-        textViewCost.setTypeface(typeface_brainfish);
+        textViewCost.setTypeface(typeface_verdana);
         //textViewCost.setTextColor();
 
         TextView textViewTime = adapterView.findViewById(R.id.id_customAdapter_TextView_time);
         textViewTime.setText(services.get(position).getTime());
         textViewTime.setTextSize(15);
-        textViewTime.setTypeface(typeface_brainfish);
+        textViewTime.setTypeface(typeface_verdana);
         //textViewTime.setTextColor();
 
         return adapterView;
