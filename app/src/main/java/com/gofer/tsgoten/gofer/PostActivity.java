@@ -6,11 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -28,7 +34,12 @@ public class PostActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.americanBlue));
 
-        final Intent intentOld = getIntent();
+        final Spinner spinner = findViewById(R.id.id_post_Spinner);
+        final ArrayList<String> strings = new ArrayList<>();
+        strings.add("Offer");
+        strings.add("Task");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, strings);
+        spinner.setAdapter(arrayAdapter);
 
         final EditText editTextTitle = findViewById(R.id.id_post_EditText_title);
         final EditText editTextCost = findViewById(R.id.id_post_EditText_cost);
@@ -37,10 +48,10 @@ public class PostActivity extends AppCompatActivity {
         (findViewById(R.id.id_post_Button_submit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!(editTextTitle.getText().toString().equals("")) && !(editTextCost.getText().toString().equals("")) && !(editTextDescription.getText().toString().equals(""))){
+                if(!(editTextTitle.getText().toString().equals("")) && !(editTextCost.getText().toString().equals("")) && !(editTextDescription.getText().toString().equals("")) && !(spinner.isSelected())){
 
                     String [] objectArray = new String[4];
-                    objectArray[0]=intentOld.getStringExtra(MainActivity.SUBMIT_TYPE);
+                    objectArray[0]=strings.get(spinner.getSelectedItemPosition()).toLowerCase();
                     objectArray[1]=editTextTitle.getText().toString();
                     objectArray[2]=editTextCost.getText().toString();
                     objectArray[3]=editTextDescription.getText().toString();

@@ -31,10 +31,10 @@ public class InfoActivity extends AppCompatActivity {
         TextView textViewTime = findViewById(R.id.id_info_TextView_timeUploaded);
         TextView textViewDescription = findViewById(R.id.id_info_TextView_description);
 
-        textViewTitle.setTextSize(20);
-        textViewCost.setTextSize(20);
-        textViewDescription.setTextSize(20);
-        textViewTime.setTextSize(20);
+        textViewTitle.setTextSize(25);
+        textViewCost.setTextSize(15);
+        textViewDescription.setTextSize(15);
+        textViewTime.setTextSize(10);
 
         textViewTitle.setTypeface(typeface_verdana);
         textViewCost.setTypeface(typeface_verdana);
@@ -46,9 +46,9 @@ public class InfoActivity extends AppCompatActivity {
         textViewDescription.setTextColor(getResources().getColor(R.color.americanBlue, null));
         textViewTime.setTextColor(getResources().getColor(R.color.americanBlue, null));
 
-        textViewTitle.setText(objArray[1]);
-        textViewCost.setText(objArray[2]);
-        textViewTime.setText(objArray[4]);
-        textViewDescription.setText(objArray[3]);
+        textViewTitle.setText("  "+objArray[1]);
+        textViewCost.setText("  "+objArray[2]);
+        textViewTime.setText("  "+objArray[4]);
+        textViewDescription.setText("  "+objArray[3]);
     }
 }
