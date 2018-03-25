@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageButtonSubmit;
     static final String SUBMIT_TYPE="submit type";
     static final int POST_KEY_CODE = 000001;
+    static final String ARRAY_KEY="key to access obj array in infoActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,18 +75,26 @@ public class MainActivity extends AppCompatActivity {
     public void setViewOffer(){
         textViewTitle.setText(R.string.title_offer);
 
-        ArrayList<Service>services=new ArrayList<>();
+        final ArrayList<Service>services=new ArrayList<>();
         //need to populate this ArrayList
         //Remember to fill with Offers
         long unixTime = System.currentTimeMillis()/1000;
-        services.add(new Offer("WILL PAINT", "I will paint anything you want me to", "$10", unixTime));
+        services.add(new Offer("Painting", "I will paint anything.", "$10", unixTime));
 
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.adapter_custom, services);
         listViewMain.setAdapter(customAdapter);
         listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //when you click on an element of the view we change shit here!!
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+                String [] objArray = new String[5];
+                objArray[0]="offer";
+                objArray[1]=services.get(position).getTitle();
+                objArray[2]=services.get(position).getCost();
+                objArray[3]=services.get(position).getDescription();
+                objArray[4]=services.get(position).timeToString();
+                intent.putExtra(ARRAY_KEY, objArray);
+                startActivity(intent);
             }
         });
 
@@ -102,17 +111,26 @@ public class MainActivity extends AppCompatActivity {
     public void setViewTask(){
         textViewTitle.setText(R.string.title_task);
 
-        ArrayList<Service>services=new ArrayList<>();
+        final ArrayList<Service>services=new ArrayList<>();
         //need to populate this ArrayList
         //Remember to fill with Tasks
-        //services.add(new Task("ok", "description", "cost", null));
+        long unixTime = System.currentTimeMillis()/1000;
+        services.add(new Task("Painting", "I need someone to paint.", "$18", unixTime));
 
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.adapter_custom, services);
         listViewMain.setAdapter(customAdapter);
         listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //when you click on an element of the view we change shit here!!
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+                String [] objArray = new String[5];
+                objArray[0]="offer";
+                objArray[1]=services.get(position).getTitle();
+                objArray[2]=services.get(position).getCost();
+                objArray[3]=services.get(position).getDescription();
+                objArray[4]=services.get(position).timeToString();
+                intent.putExtra(ARRAY_KEY, objArray);
+                startActivity(intent);
             }
         });
 

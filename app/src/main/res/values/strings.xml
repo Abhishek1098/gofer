@@ -7,4 +7,6 @@
     <string name="string_time">Time</string>
     <string name="string_description">Description</string>
     <string name="string_submit">Submit</string>
+    <string name="string_method_of_payment">Method of Payment</string>
+    <string name="string_time_uploaded">Time Uploaded</string>
 </resources>
