@@ -101,7 +101,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="@string/string_time_uploaded"
+            android:text="time uploaded:"
             app:layout_constraintBottom_toTopOf="@+id/id_info_TextView_static_description"
             app:layout_constraintEnd_toEndOf="@+id/id_info_TextView_static_description"
             app:layout_constraintHorizontal_bias="0.478"
