@@ -6,12 +6,18 @@ import java.util.GregorianCalendar;
 
 public class Service{
     private String title, description, cost;
+
+    private String firebaseKey;
+    private float rating;
+
     private Long time;
     public Service(String title, String description, String cost, Long time){
         this.title=title;
         this.description=description;
         this.cost=cost;
         this.time=time;
+        firebaseKey = "";
+        rating = (float)Math.sqrt(Math.random()*25);
     }
     public String getTitle(){
         return title;
@@ -47,7 +53,22 @@ public class Service{
             case 1:
                 am_pm = "PM"; break;
         }
+
         String dateTime = day + " " + calendar.get(Calendar.HOUR) + " " + am_pm;
         return dateTime;
+    }
+    public String getFirebaseKey(){
+        return firebaseKey;
+    }
+    public void setFirebaseKey(String s){
+        firebaseKey = s;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }

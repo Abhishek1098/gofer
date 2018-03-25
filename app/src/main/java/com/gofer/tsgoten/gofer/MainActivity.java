@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseDatabase database;
 
+    BottomNavigationView bottomNavigationView;
+
+    int currentBottomSelected;
+
     DatabaseReference offerRef;
     DatabaseReference tasksRef;
     @Override
@@ -68,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
                     String description = (String) messageSnapshot.child("description").getValue();
                     long time = (long)messageSnapshot.child("time").getValue();
                     String cost = messageSnapshot.child("cost").getValue(String.class);
+                    String key = messageSnapshot.child("firebaseKey").getValue(String.class);
                     servicesOffer.add(new Offer(title, description, cost, time));
+                    servicesOffer.get(servicesOffer.size()-1).setFirebaseKey(key);
+//                    Log.d("HERE IS KEY", servicesOffer.get(servicesOffer.size()-1).getFirebaseKey());
                     listViewMain.deferNotifyDataSetChanged();
                     setViewOffer();
                 }
@@ -88,7 +95,10 @@ public class MainActivity extends AppCompatActivity {
                     String description = (String) messageSnapshot.child("description").getValue();
                     long time = (long)messageSnapshot.child("time").getValue();
                     String cost = messageSnapshot.child("cost").getValue(String.class);
+                    String key = messageSnapshot.child("firebaseKey").getValue(String.class);
                     servicesTask.add(new Offer(title, description, cost, time));
+                    servicesTask.get(servicesTask.size()-1).setFirebaseKey(key);
+                    //Log.d("HERE IS KEY", servicesTask.get(servicesTask.size()-1).getFirebaseKey());
                     listViewMain.deferNotifyDataSetChanged();
                     setViewTask();
                 }
@@ -122,16 +132,18 @@ public class MainActivity extends AppCompatActivity {
         listViewMain = findViewById(R.id.id_main_ListView);
         //imageButtonSubmit = findViewById(R.id.id_main_ImageView_addButton);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.id_main_NavigationView);
+        bottomNavigationView = findViewById(R.id.id_main_NavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.id_main_NavigationView_offer:
                         setViewOffer();
+                        currentBottomSelected = R.id.id_main_NavigationView_offer;
                         return true;
                     case R.id.id_main_NavigationView_task:
                         setViewTask();
+                        currentBottomSelected = R.id.id_main_NavigationView_task;
                         return true;
                     case R.id.id_main_NavigationView_addButton:
                         Intent intent1 = new Intent(MainActivity.this, PostActivity.class);
@@ -146,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void setViewOffer(){
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.adapter_custom, servicesOffer);
+        //bottomNavigationView.setSelectedItemId(currentBottomSelected);
         listViewMain.setAdapter(customAdapter);
         listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -158,26 +171,39 @@ public class MainActivity extends AppCompatActivity {
                 objArray[3]=servicesOffer.get(position).getDescription();
                 objArray[4]=servicesOffer.get(position).timeToString();
                 intent.putExtra(ARRAY_KEY, objArray);
+                intent.putExtra("firebaseKey", servicesOffer.get(position).getFirebaseKey());
+                intent.putExtra("rating", servicesOffer.get(position).getRating());
                 startActivity(intent);
             }
         });
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //setViewOffer();
+        //setViewTask();
+        //bottomNavigationView.setSelectedItemId(currentBottomSelected);
+    }
+
     public void setViewTask(){
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.adapter_custom, servicesTask);
+        //bottomNavigationView.setSelectedItemId(currentBottomSelected);
         listViewMain.setAdapter(customAdapter);
         listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, InfoActivity.class);
                 String [] objArray = new String[5];
-                objArray[0]="offer";
+                objArray[0]="task";
                 objArray[1]=servicesTask.get(position).getTitle();
                 objArray[2]=servicesTask.get(position).getCost();
                 objArray[3]=servicesTask.get(position).getDescription();
                 objArray[4]=servicesTask.get(position).timeToString();
                 intent.putExtra(ARRAY_KEY, objArray);
+                intent.putExtra("firebaseKey", servicesTask.get(position).getFirebaseKey());
+                intent.putExtra("rating", servicesOffer.get(position).getRating());
                 startActivity(intent);
             }
         });
@@ -193,7 +219,11 @@ public class MainActivity extends AppCompatActivity {
                     case "offer":
                         Offer offer = new Offer(objArray[1], objArray[3],  objArray[2],unixTime);
                         //Add this object to the database
-                        offerRef.child(offerRef.push().getKey()).setValue(offer);
+                        String saveKey = offerRef.push().getKey();
+                        offer.setFirebaseKey(saveKey);
+                        offerRef.child(saveKey).setValue(offer);
+
+                        Log.d("HERE IS THE KEY", saveKey);
                         break;
 
                     case "task":
