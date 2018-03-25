@@ -21,11 +21,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
     private EditText mEmailField;
     private EditText mPasswordField;
+    private EditText mNameField;
     private Button loginButton;
     private Button signupButton;
     private TextView statusTextView;
@@ -34,6 +37,8 @@ public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
 
     private FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +50,12 @@ public class SignupActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.americanBlue));
 
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("users");
 
         mEmailField = findViewById(R.id.signup_email);
         mPasswordField = findViewById(R.id.signup_password);
+        mNameField = findViewById(R.id.signup_name);
         loginButton = findViewById(R.id.signup_login);
         signupButton = findViewById(R.id.signup_submit);
         statusTextView = findViewById(R.id.status);
@@ -70,6 +78,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        //TarLog.d("user", currentUser.getEmail());
         updateUI(currentUser);
     }
     private void createAccount(String email, String password) {
@@ -168,9 +177,7 @@ public class SignupActivity extends AppCompatActivity {
     }
     private void updateUI(FirebaseUser user){
         if(user != null) {
-            Intent intent = new Intent();
-            intent.putExtra(FIREBASE_USER_ID_CODE, user.getUid());
-            setResult(RESULT_OK);
+            myRef.child(user.getUid()).setValue(user.getEmail());
             finish();
         }
         else{
