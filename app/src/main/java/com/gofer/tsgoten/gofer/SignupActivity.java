@@ -1,5 +1,6 @@
 package com.gofer.tsgoten.gofer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button signupButton;
     private TextView statusTextView;
 
+    static final String FIREBASE_USER_ID_CODE = "hello";
     private static final String TAG = "EmailPassword";
 
     private FirebaseAuth mAuth;
@@ -157,7 +159,10 @@ public class SignupActivity extends AppCompatActivity {
         return valid;
     }
     private void updateUI(FirebaseUser user){
-        if(user != null){
+        if(user != null) {
+            Intent intent = new Intent();
+            intent.putExtra(FIREBASE_USER_ID_CODE, user.getUid());
+            setResult(RESULT_OK);
             finish();
         }
         else{
