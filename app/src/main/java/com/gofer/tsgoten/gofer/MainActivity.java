@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -28,8 +29,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listViewMain;
-    private TextView textViewTitle;
-    private Typeface typeface_verdana;
     private ImageView imageButtonSubmit;
     static final String SUBMIT_TYPE="submit type";
     static final int POST_KEY_CODE = 000001;
@@ -46,18 +45,16 @@ public class MainActivity extends AppCompatActivity {
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.silver));
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.americanBlue));
 
-        textViewTitle = findViewById(R.id.id_main_TextView_title);
         listViewMain = findViewById(R.id.id_main_ListView);
         imageButtonSubmit = findViewById(R.id.id_main_ImageView_addButton);
 
-        typeface_verdana = Typeface.createFromAsset(getAssets(), "verdana.ttf");
-        textViewTitle.setTypeface(typeface_verdana);
-        textViewTitle.setTextSize(80);
-        textViewTitle.setTextColor(getResources().getColor(R.color.silver, null)); //light blue
+        ConstraintLayout constraintLayout = findViewById(R.id.id_main_ConstraintLayout);
+        constraintLayout.setBackgroundColor(getResources().getColor(R.color.americanWhite, null));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.id_main_NavigationView);
+        //bottomNavigationView.setBackgroundColor(getResources().getColor(R.color.viking_purple, null));
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -76,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
         setViewOffer(); //Because android default selects the first item in the navigation view
     }
     public void setViewOffer(){
-        textViewTitle.setText(R.string.title_offer);
-
         final ArrayList<Service>services=new ArrayList<>();
         //need to populate this ArrayList
         //Remember to fill with Offers
@@ -112,13 +107,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setViewTask(){
-        textViewTitle.setText(R.string.title_task);
-
         final ArrayList<Service>services=new ArrayList<>();
         //need to populate this ArrayList
         //Remember to fill with Tasks
         long unixTime = System.currentTimeMillis()/1000;
-        services.add(new Task("Painting", "I need someone to paint.", "$18", unixTime));
+        services.add(new Task("Dog-Walking", "Someone walk my dog", "$18", unixTime));
 
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.adapter_custom, services);
         listViewMain.setAdapter(customAdapter);

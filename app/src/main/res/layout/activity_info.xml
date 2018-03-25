@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/americanRed"
             android:text="Title" />
 
         <TextView
@@ -44,6 +45,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/americanRed"
             android:text="Description" />
 
         <TextView
@@ -72,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/americanRed"
             android:text="Cost" />
 
         <TextView
@@ -102,6 +105,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="time uploaded:"
+            android:textColor="@color/americanRed"
             app:layout_constraintBottom_toTopOf="@+id/id_info_TextView_static_description"
             app:layout_constraintEnd_toEndOf="@+id/id_info_TextView_static_description"
             app:layout_constraintHorizontal_bias="0.478"

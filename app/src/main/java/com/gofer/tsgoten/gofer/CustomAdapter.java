@@ -39,19 +39,19 @@ public class CustomAdapter extends ArrayAdapter{
         textViewTitle.setText(services.get(position).getTitle());
         textViewTitle.setTextSize(35);
         textViewTitle.setTypeface(typeface_verdana);
-        //textViewTitle.setTextColor();
+        textViewTitle.setTextColor(context.getResources().getColor(R.color.americanRed, null));
 
         TextView textViewCost = adapterView.findViewById(R.id.id_customAdapter_TextView_cost);
         textViewCost.setText(services.get(position).getCost());
         textViewCost.setTextSize(25);
         textViewCost.setTypeface(typeface_verdana);
-        //textViewCost.setTextColor();
+        textViewCost.setTextColor(context.getResources().getColor(R.color.americanBlue, null));
 
         TextView textViewTime = adapterView.findViewById(R.id.id_customAdapter_TextView_time);
         textViewTime.setText(services.get(position).timeToString());
         textViewTime.setTextSize(15);
         textViewTime.setTypeface(typeface_verdana);
-        //textViewTime.setTextColor();
+        textViewTime.setTextColor(context.getResources().getColor(R.color.americanRed, null));
 
         return adapterView;
     }

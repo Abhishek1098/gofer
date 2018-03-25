@@ -4,11 +4,13 @@
     <item
         android:id="@+id/id_main_NavigationView_offer"
         android:icon="@drawable/ic_offer"
-        android:title="@string/title_offer" />
+        android:title="@string/title_offer"
+        android:iconTint="@color/colorGold"/>
 
     <item
         android:id="@+id/id_main_NavigationView_task"
         android:icon="@drawable/ic_task"
-        android:title="@string/title_task" />
+        android:title="@string/title_task"
+        android:iconTint="@color/colorGold"/>
 
 </menu>

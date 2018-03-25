@@ -24,7 +24,7 @@ public class InfoActivity extends AppCompatActivity {
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.silver));
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.americanBlue));
 
         TextView textViewTitle = findViewById(R.id.id_info_TextView_title);
         TextView textViewCost = findViewById(R.id.id_info_TextView_cost);
@@ -40,6 +40,11 @@ public class InfoActivity extends AppCompatActivity {
         textViewCost.setTypeface(typeface_verdana);
         textViewDescription.setTypeface(typeface_verdana);
         textViewTime.setTypeface(typeface_verdana);
+
+        textViewTitle.setTextColor(getResources().getColor(R.color.americanBlue, null));
+        textViewCost.setTextColor(getResources().getColor(R.color.americanBlue, null));
+        textViewDescription.setTextColor(getResources().getColor(R.color.americanBlue, null));
+        textViewTime.setTextColor(getResources().getColor(R.color.americanBlue, null));
 
         textViewTitle.setText(objArray[1]);
         textViewCost.setText(objArray[2]);

@@ -3,5 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="silver">#C0C0C0</color>
+    <color name="colorBlueLight">#1E90FF</color>
+    <color name="colorGold">#FFC62F</color>
+    <color name="americanRed">#E0162B</color>
+    <color name="americanWhite">#f8f8ff</color>
+    <color name="americanBlue">#0052A5</color>
+
 </resources>
