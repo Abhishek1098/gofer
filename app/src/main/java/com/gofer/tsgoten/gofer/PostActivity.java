@@ -53,7 +53,7 @@ public class PostActivity extends AppCompatActivity {
                     String [] objectArray = new String[4];
                     objectArray[0]=strings.get(spinner.getSelectedItemPosition()).toLowerCase();
                     objectArray[1]=editTextTitle.getText().toString();
-                    objectArray[2]=editTextCost.getText().toString();
+                    objectArray[2]="$" + editTextCost.getText().toString();
                     objectArray[3]=editTextDescription.getText().toString();
 
                     long unixTime = System.currentTimeMillis() / 1000L;

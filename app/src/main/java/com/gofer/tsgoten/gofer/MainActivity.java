@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +41,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listViewMain;
+    static final String SUBMIT_TYPE="submit type";
     static final int POST_KEY_CODE = 000001;
     static final String ARRAY_KEY="key to access obj array in infoActivity";
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent (this, SignupActivity.class);
+        final Intent intent = new Intent (this, SignupActivity.class);
         startActivity(intent);
 
         firebaseUser = mAuth.getInstance().getCurrentUser();
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.americanBlue));
 
         listViewMain = findViewById(R.id.id_main_ListView);
+        //imageButtonSubmit = findViewById(R.id.id_main_ImageView_addButton);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.id_main_NavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -129,23 +130,21 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.id_main_NavigationView_offer:
                         setViewOffer();
                         return true;
-                    case R.id.id_main_NavigationView_addButton:
-                        Intent intent = new Intent(MainActivity.this, PostActivity.class);
-                        startActivityForResult(intent, POST_KEY_CODE);
-                        return true;
                     case R.id.id_main_NavigationView_task:
                         setViewTask();
                         return true;
+                    case R.id.id_main_NavigationView_addButton:
+                        Intent intent1 = new Intent(MainActivity.this, PostActivity.class);
+                        startActivityForResult(intent1, POST_KEY_CODE);
+
                 }
                 return false;
             }
         });
 
-        setViewOffer();
+        setViewOffer(); //Because android default selects the first item in the navigation view
     }
     public void setViewOffer(){
-        servicesOffer.add(new Offer("Shoes", "Purchase shoes from me", "$30", (long)23));
-
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.adapter_custom, servicesOffer);
         listViewMain.setAdapter(customAdapter);
         listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     public void setViewTask(){
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, InfoActivity.class);
                 String [] objArray = new String[5];
-                objArray[0]="task";
+                objArray[0]="offer";
                 objArray[1]=servicesTask.get(position).getTitle();
                 objArray[2]=servicesTask.get(position).getCost();
                 objArray[3]=servicesTask.get(position).getDescription();
@@ -192,11 +192,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (objArray[0]){
                     case "offer":
                         Offer offer = new Offer(objArray[1], objArray[3],  objArray[2],unixTime);
+                        //Add this object to the database
                         offerRef.child(offerRef.push().getKey()).setValue(offer);
                         break;
 
                     case "task":
                         Task task = new Task(objArray[1], objArray[3], objArray[2], unixTime);
+                        //Add this object to the database
                         tasksRef.child(tasksRef.push().getKey()).setValue(task);
                         break;
                 }

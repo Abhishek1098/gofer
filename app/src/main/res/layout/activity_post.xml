@@ -30,37 +30,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="88dp"
             android:hint="Title"
-            android:maxLength="10"/>
+            android:maxLength="10"
+            android:textColorLink="@color/americanRed"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="88dp" />
 
         <EditText
             android:id="@+id/id_post_EditText_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Description"
             android:inputType="textPersonName"
+            android:textColorLink="@color/americanRed"
             tools:layout_editor_absoluteX="68dp"
-            tools:layout_editor_absoluteY="399dp"
-            android:hint="Description"/>
+            tools:layout_editor_absoluteY="399dp" />
 
         <EditText
             android:id="@+id/id_post_EditText_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:hint="Cost"
+            android:textColorLink="@color/americanRed"
             tools:layout_editor_absoluteX="72dp"
-            tools:layout_editor_absoluteY="230dp"
-            android:hint="Cost"/>
+            tools:layout_editor_absoluteY="230dp" />
 
         <Button
             android:id="@+id/id_post_Button_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/string_submit"
+            android:textColorLink="@color/americanRed"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="482dp" />
     </LinearLayout>

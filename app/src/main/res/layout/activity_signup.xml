@@ -30,7 +30,8 @@
         android:layout_weight="1"
         android:ems="10"
         android:hint="gofer@gmail.com"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColorLink="@color/americanRed" />
 
     <EditText
         android:id="@+id/signup_password"
@@ -40,7 +41,8 @@
         android:layout_weight="1"
         android:ems="10"
         android:hint="password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColorLink="@color/americanRed" />
 
     <LinearLayout
         android:layout_width="match_parent"

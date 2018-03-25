@@ -62,6 +62,8 @@ public class SignupActivity extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(SignupActivity.this, "creatAccount was selected", Toast.LENGTH_SHORT).show();
+                Log.d("tried", "login attempt made");
                 createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
         });
@@ -78,6 +80,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
         //TarLog.d("user", currentUser.getEmail());
         updateUI(currentUser);
     }
