@@ -38,7 +38,6 @@ public class InfoActivity extends AppCompatActivity {
         acceptReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 finish();
             }
         });
