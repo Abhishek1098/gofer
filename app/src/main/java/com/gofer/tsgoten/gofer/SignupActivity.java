@@ -1,6 +1,7 @@
 package com.gofer.tsgoten.gofer;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -43,6 +44,13 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        Typeface typeface_verdana = Typeface.createFromAsset(getAssets(), "verdana.ttf");
+        TextView textViewTitle = findViewById(R.id.id_signin_title);
+        textViewTitle.setTextColor(getResources().getColor(R.color.americanRed, null));
+        textViewTitle.setTypeface(typeface_verdana);
+        textViewTitle.setText("Gofer");
+        textViewTitle.setTextSize(100);
 
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

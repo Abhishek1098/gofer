@@ -5,25 +5,15 @@ import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class InfoActivity extends AppCompatActivity {
 
     Button acceptReject;
-    FirebaseDatabase database;
-    DatabaseReference offersRef;
-    DatabaseReference tasksRef;
-    RatingBar ratingBar;
-    String firebaseKey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +22,13 @@ public class InfoActivity extends AppCompatActivity {
         Typeface typeface_verdana = Typeface.createFromAsset(getAssets(), "verdana.ttf");
 
         Intent intent = getIntent();
-        final String [] objArray = intent.getStringArrayExtra(MainActivity.ARRAY_KEY);
-
-        Intent getIntent = getIntent();
-        firebaseKey = intent.getStringExtra("firebaseKey");
-        database = FirebaseDatabase.getInstance();
-        offersRef = database.getReference("offers");
-        tasksRef = database.getReference("tasks");
+        String [] objArray = intent.getStringArrayExtra(MainActivity.ARRAY_KEY);
 
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.americanBlue));
-        ratingBar = findViewById(R.id.id_post_RatingBar);
-        ratingBar.setRating(intent.getFloatExtra("rating", 1.0f));
+
         TextView textViewTitle = findViewById(R.id.id_info_TextView_title);
         TextView textViewCost = findViewById(R.id.id_info_TextView_cost);
         TextView textViewTime = findViewById(R.id.id_info_TextView_timeUploaded);
@@ -55,16 +38,8 @@ public class InfoActivity extends AppCompatActivity {
         acceptReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("HERE IS THE KEY AGAIN", firebaseKey);
-                if(objArray[0].equals("offer")){
-                    offersRef.child(firebaseKey).removeValue();
 
-                }
-                else{
-                    tasksRef.child(firebaseKey).removeValue();
-                }
                 finish();
-
             }
         });
 
