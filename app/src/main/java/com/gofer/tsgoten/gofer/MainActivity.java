@@ -22,6 +22,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageButtonSubmit;
     static final String SUBMIT_TYPE="submit type";
     static final int POST_KEY_CODE = 000001;
+    static final int FIREBASE_USER = 420;
+
+    private String firebaseUID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         textViewTitle.setTypeface(typeface_verdana);
         textViewTitle.setTextSize(80);
         textViewTitle.setTextColor(getResources().getColor(R.color.silver, null)); //light blue
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World");
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.id_main_NavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -138,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (objArray[0]){
                     case "offer":
                         Offer offer = new Offer(objArray[1], objArray[2], objArray[3], unixTime);
+
                         //Add this object to the database
                         break;
 
@@ -146,6 +157,9 @@ public class MainActivity extends AppCompatActivity {
                         //Add this object to the database
                         break;
                 }
+            }
+            if(requestCode == FIREBASE_USER){
+                firebaseUID = data.getStringExtra("UserID");
             }
         }
     }
