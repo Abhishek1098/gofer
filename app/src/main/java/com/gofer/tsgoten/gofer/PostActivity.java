@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class PostActivity extends AppCompatActivity {
 
     static final String SERVICE_OBJ_KEY = "key for object";
+    static final String SERVICE_TIME_KEY = "time obj was made";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +30,17 @@ public class PostActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!(editTextTitle.getText().toString().equals("")) && !(editTextCost.getText().toString().equals("")) && !(editTextDescription.getText().toString().equals(""))){
 
-                    String [] objectArray = new String[5];
+                    String [] objectArray = new String[4];
                     objectArray[0]=intentOld.getStringExtra(MainActivity.SUBMIT_TYPE);
                     objectArray[1]=editTextTitle.getText().toString();
                     objectArray[2]=editTextCost.getText().toString();
                     objectArray[3]=editTextDescription.getText().toString();
-                    objectArray[4]="time";
-                    //long unixTime = System.currentTimeMillis() / 1000L;
+
+                    long unixTime = System.currentTimeMillis() / 1000L;
 
                     Intent intentNew = new Intent();
                     intentNew.putExtra(SERVICE_OBJ_KEY, objectArray);
+                    intentNew.putExtra(SERVICE_TIME_KEY, unixTime);
                     setResult(RESULT_OK, intentNew);
                     finish();
 

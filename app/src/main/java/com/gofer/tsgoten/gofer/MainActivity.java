@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,9 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listViewMain;
     private TextView textViewTitle;
-    private FloatingActionButton floatingActionButton;
     private Typeface typeface_verdana;
-    private ImageButton imageButtonSubmit;
+    private ImageView imageButtonSubmit;
     static final String SUBMIT_TYPE="submit type";
     static final int POST_KEY_CODE = 000001;
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         textViewTitle = findViewById(R.id.id_main_TextView_title);
         listViewMain = findViewById(R.id.id_main_ListView);
-        imageButtonSubmit = findViewById(R.id.id_main_ImageButton_submit);
+        imageButtonSubmit = findViewById(R.id.id_main_ImageView_addButton);
 
         typeface_verdana = Typeface.createFromAsset(getAssets(), "verdana.ttf");
         textViewTitle.setTypeface(typeface_verdana);
@@ -77,12 +77,8 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Service>services=new ArrayList<>();
         //need to populate this ArrayList
         //Remember to fill with Offers
-        services.add(new Offer("WILL PAINT", "I will paint anything you want me to", "$10", "6;00"));
-        services.add(new Offer("WILL PAINT", "I will paint anything you want me to", "$10", "6;00"));
-        services.add(new Offer("WILL PAINT", "I will paint anything you want me to", "$10", "6;00"));
-        services.add(new Offer("WILL PAINT", "I will paint anything you want me to", "$10", "6;00"));
-        services.add(new Offer("WILL PAINT", "I will paint anything you want me to", "$10", "6;00"));
-        services.add(new Offer("WILL PAINT", "I will paint anything you want me to", "$10", "6;00"));
+        long unixTime = System.currentTimeMillis()/1000;
+        services.add(new Offer("WILL PAINT", "I will paint anything you want me to", "$10", unixTime));
 
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.adapter_custom, services);
         listViewMain.setAdapter(customAdapter);
@@ -109,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Service>services=new ArrayList<>();
         //need to populate this ArrayList
         //Remember to fill with Tasks
-        services.add(new Task("ok", "description", "cost", "time"));
+        //services.add(new Task("ok", "description", "cost", null));
 
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.adapter_custom, services);
         listViewMain.setAdapter(customAdapter);
@@ -135,15 +131,16 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             if(requestCode == POST_KEY_CODE){
                 String [] objArray = data.getStringArrayExtra(PostActivity.SERVICE_OBJ_KEY);
+                Long unixTime = data.getLongExtra(PostActivity.SERVICE_TIME_KEY, 00);
                 switch (objArray[0]){
                     case "offer":
-                        Offer offer = new Offer(objArray[1], objArray[2], objArray[3],objArray[4]);
-                        //Add this to the database
+                        Offer offer = new Offer(objArray[1], objArray[2], objArray[3], unixTime);
+                        //Add this object to the database
                         break;
 
                     case "task":
-                        Task task = new Task(objArray[1], objArray[2], objArray[3],objArray[4]);
-                        //Add this to the database
+                        Task task = new Task(objArray[1], objArray[2], objArray[3], unixTime);
+                        //Add this object to the database
                         break;
                 }
             }
